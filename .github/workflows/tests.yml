@@ -1,0 +1,58 @@
+name: Tests & Linting
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Z-RevixDB uses zero third-party dependencies (stdlib only)
+        # pip install -r requirements.txt  # Empty for stdlib-only project
+    
+    - name: Run tests
+      run: |
+        python -m unittest discover tests -v
+      continue-on-error: false
+    
+    - name: Check for syntax errors
+      run: |
+        python -m py_compile zrevixdb/*.py app.py
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    
+    - name: Lint with pylint
+      run: |
+        pylint zrevixdb/*.py app.py --disable=C0111,C0103 || true
