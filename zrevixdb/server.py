@@ -312,11 +312,16 @@ def make_request_handler(router: Router, static_dir: str):
                     self._send_response(Response.file(html_candidate, content_type="text/html; charset=utf-8"))
                     return
 
-            # Serve static files under /static/
-            if method == "GET" and path.startswith("/static/"):
-                sub_path = path[len("/static/"):]
-                if self._serve_static(sub_path):
-                    return
+            # Serve static assets (css, js, images, static, etc.)
+            for prefix in ("/css/", "/js/", "/images/", "/static/"):
+                if method == "GET" and path.startswith(prefix):
+                    rel = path.lstrip("/")
+                    if self._serve_static(rel):
+                        return
+                    if prefix == "/static/":
+                        sub = path[len("/static/"):]
+                        if self._serve_static(sub):
+                            return
 
             # Read request body if present
             content_length = int(self.headers.get("Content-Length", 0))
@@ -370,7 +375,9 @@ def run_server(
     if router is None:
         router = Router()
     if static_dir is None:
-        static_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static")
+        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # Fall back to root directory or static directory if it exists
+        static_dir = root_dir if os.path.isfile(os.path.join(root_dir, "index.html")) else os.path.join(root_dir, "static")
 
     handler_cls = make_request_handler(router, static_dir)
     server = ThreadingHTTPServer((host, port), handler_cls)

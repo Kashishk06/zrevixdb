@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Z-RevixDB | Login</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="auth-wrapper">
         <div class="auth-card">
             <div class="auth-header">
                 <div class="logo-badge" aria-label="Z-RevixDB brand">
-                    <img src="/static/images/logo.jpeg" alt="Z-RevixDB Logo" class="brand-logo">
+                    <img src="images/logo.jpeg" alt="Z-RevixDB Logo" class="brand-logo">
                 </div>
                 <p class="auth-subtitle">Zero-Dependency Enterprise Data Versioning</p>
             </div>
@@ -57,7 +57,7 @@
                     🔒 Protected with PBKDF2-HMAC-SHA256 & HttpOnly Sessions
                 </p>
                 <div class="auth-links">
-                    <a href="/" class="link-subtle">&larr; Back to Landing Page</a>
+                    <a href="index.html" class="link-subtle">&larr; Back to Landing Page</a>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
             try {
                 const res = await fetch('/api/me', { credentials: 'include' });
                 if (res.ok) {
-                    window.location.href = '/dashboard.html';
+                    window.location.href = 'dashboard.html';
                 }
             } catch (err) {
                 console.error("Session check error", err);
@@ -108,7 +108,7 @@
                     alertBox.textContent = `Login successful! Welcome, ${data.user.username} (${data.user.role}). Redirecting...`;
                     alertBox.classList.remove('hidden');
                     setTimeout(() => {
-                        window.location.href = '/dashboard.html';
+                        window.location.href = 'dashboard.html';
                     }, 800);
                 } else {
                     alertBox.className = "alert-box alert-danger";

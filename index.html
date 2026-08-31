@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Z-RevixDB | Enterprise Data Versioning & Time-Travel</title>
     <meta name="description" content="Z-RevixDB is a secure enterprise data versioning system with audit trails, time-travel, integrity checks, and instant recovery.">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="landing-page-body">
     <div class="page-shell">
@@ -13,7 +13,7 @@
             <div class="brand-wrap">
                 <div class="logo-badge" aria-label="Z-RevixDB brand">
                     <img
-                        src="/static/images/logo.jpeg"
+                        src="images/logo.jpeg"
                         alt="Z-RevixDB Logo"
                         class="brand-logo"
                     >
@@ -32,7 +32,7 @@
                     <span class="status-dot"></span>
                     <span class="status-text">Server active • stdlib-only</span>
                 </div>
-                <a href="/login.html" id="auth-nav-link" class="btn btn-sm btn-primary">Login</a>
+                <a href="login.html" id="auth-nav-link" class="btn btn-sm btn-primary">Login</a>
             </div>
         </header>
 
@@ -51,7 +51,7 @@
                         </p>
 
                         <div class="cta-row">
-                            <a href="/login.html" class="btn btn-primary">Access Platform</a>
+                            <a href="login.html" class="btn btn-primary">Access Platform</a>
                             <a href="#features" class="btn btn-secondary">Explore Features</a>
                         </div>
 
@@ -79,9 +79,9 @@
                                     loop
                                     playsinline
                                     preload="auto"
-                                    poster="/static/images/logo.jpeg"
+                                    poster="images/logo.jpeg"
                                 >
-                                    <source src="/static/images/your-video.mp4" type="video/mp4">
+                                    <source src="images/your-video.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
@@ -206,7 +206,7 @@
                     const data = await res.json();
                     const navLink = document.getElementById('auth-nav-link');
                     navLink.textContent = `Dashboard (${data.user.username})`;
-                    navLink.href = '/dashboard.html';
+                    navLink.href = 'dashboard.html';
                 }
             } catch (e) {}
         }

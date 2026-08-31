@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Z-RevixDB | Full-Text Search</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="app-container">
         <!-- Header -->
         <header class="hero-header">
             <div class="header-left">
-                <a href="/dashboard.html" class="logo-badge" aria-label="Z-RevixDB search home">
-                    <img src="/static/images/logo.jpeg" alt="Z-RevixDB Logo" class="brand-logo">
+                <a href="dashboard.html" class="logo-badge" aria-label="Z-RevixDB search home">
+                    <img src="images/logo.jpeg" alt="Z-RevixDB Logo" class="brand-logo">
                 </a>
                 <nav class="main-nav">
-                    <a href="/dashboard.html" class="nav-link">Control Center</a>
-                    <a href="/records.html" class="nav-link">Records & Lineage</a>
-                    <a href="/timeline.html" class="nav-link">Timeline</a>
-                    <a href="/compare.html" class="nav-link">Diff & Compare</a>
-                    <a href="/search.html" class="nav-link active">Search</a>
-                    <a href="/integrity.html" class="nav-link">Integrity Monitor</a>
-                    <a href="/audit.html" class="nav-link" data-require-role="Admin,Auditor">Audit Trail</a>
-                    <a href="/settings.html" class="nav-link" data-require-role="Admin">Settings</a>
+                    <a href="dashboard.html" class="nav-link">Control Center</a>
+                    <a href="records.html" class="nav-link">Records & Lineage</a>
+                    <a href="timeline.html" class="nav-link">Timeline</a>
+                    <a href="compare.html" class="nav-link">Diff & Compare</a>
+                    <a href="search.html" class="nav-link active">Search</a>
+                    <a href="integrity.html" class="nav-link">Integrity Monitor</a>
+                    <a href="audit.html" class="nav-link" data-require-role="Admin,Auditor">Audit Trail</a>
+                    <a href="settings.html" class="nav-link" data-require-role="Admin">Settings</a>
                 </nav>
             </div>
             <div class="header-user-panel" id="user-panel">
@@ -109,7 +109,7 @@
             try {
                 const meRes = await fetch('/api/me', { credentials: 'include' });
                 if (!meRes.ok) {
-                    window.location.href = '/login.html';
+                    window.location.href = 'login.html';
                     return;
                 }
                 const meData = await meRes.json();
@@ -130,7 +130,7 @@
                     executeSearch(qParam, urlParams.get('collection'));
                 }
             } catch (e) {
-                window.location.href = '/login.html';
+                window.location.href = 'login.html';
             }
         }
 
@@ -231,7 +231,7 @@
 
                         <div class="result-footer">
                             <span class="text-xs text-subtle">Record ID: <code>${r.record_id}</code> &bull; Last Updated: ${new Date(r.updated_at).toLocaleString()}</span>
-                            <a href="/records.html?id=${r.record_id}" class="btn btn-sm btn-primary">Inspect Record &rarr;</a>
+                            <a href="records.html?id=${r.record_id}" class="btn btn-sm btn-primary">Inspect Record &rarr;</a>
                         </div>
                     </div>
                 `).join('');
@@ -242,7 +242,7 @@
 
         async function handleLogout() {
             await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-            window.location.href = '/login.html';
+            window.location.href = 'login.html';
         }
 
         function escapeHtml(str) {

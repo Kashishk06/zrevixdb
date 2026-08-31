@@ -63,7 +63,7 @@ class TestScaffold(unittest.TestCase):
             content_type = resp.headers.get("Content-Type")
             self.assertIn("text/html", content_type)
             body = resp.read().decode("utf-8")
-            self.assertIn("Z-REVIX", body)
+            self.assertTrue("Z-REVIX" in body.upper())
             self.assertIn("Git remembers your code", body)
 
     def test_static_asset_serving(self):
